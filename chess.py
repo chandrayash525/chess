@@ -117,25 +117,36 @@ class Game:
             
            
         
-    """game class. contains the following members and methods:
-    two arrays of pieces for each player
-    8x8 piece array with references to these pieces
-    a parse function, which turns the input from the user into a list of two tuples denoting start and end points
-    a checkmateExists function which checks if either players are in checkmate
-    a checkExists function which checks if either players are in check (woah, I just got that nonsequitur)
-    a main loop, which takes input, runs it through the parser, asks the piece if the move is valid, and moves the piece if it is. if the move conflicts with another piece, that piece is removed. ischeck(mate) is run, and if there is a checkmate, the game prints a message as to who wins
-    """
+
 
 class Piece:
-    
+    l=[0];
     def __init__(self,color,name):
         self.name = name
         self.position = None
         self.Color = color
+        self.level = 1
     def isValid(self,startpos,endpos,Color,gameboard):
         if endpos in self.availableMoves(startpos[0],startpos[1],gameboard, Color = Color):
             return True
         return False
+    #increse the accuracy by incresing the level
+    def levelUp(l):
+        length = len(l) 
+        for player in range(length):
+            c=0
+            for x in range(length-1-player):
+                if(l[x]>l[x+1]):
+                    l[x],l[x+1] = l[x+1],l[x]
+                    c=1
+            if(c):
+                print(l)
+
+            else:
+                break
+        return l
+    def increaseLevel(self):
+        self.level+=1
     def __repr__(self):
         return self.name
     
